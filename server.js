@@ -33,5 +33,11 @@ app.get('/', async (req, res) => {
     await ShortUrl.findByIdAndDelete(id);
     res.redirect('/');
   });
+
+  app.post('/reset/:id', async (req, res) => {
+    const id = req.params.id;
+    await ShortUrl.findByIdAndUpdate(id, { clicks: 0 });
+    res.redirect('/');
+  });
   
 app.listen(process.env.PORT || 5000);
